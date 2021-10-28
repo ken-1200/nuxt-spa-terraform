@@ -25,7 +25,7 @@ For detailed explanation on how things work, check out the [documentation](https
 $ yarn install
 $ yarn run build
 # s3 に dist/ を同期
-$ aws s3 sync dist/ s3://${DEPLOY_BUCKET}
+$ aws s3 sync dist/ s3://${DEPLOY_BUCKET} --delete true
 # cloudfrontのキャッシュ全て（--paths "/*"） を削除
 $ aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION_ID} --paths "/*" --region ap-northeast-1
 ```

@@ -29,3 +29,12 @@ $ aws s3 sync dist/ s3://${DEPLOY_BUCKET} --delete
 # cloudfrontのキャッシュ全て（--paths "/*"） を削除
 $ aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION_ID} --paths "/*" --region ap-northeast-1
 ```
+
+## 環境構築
+
+```
+terraform init
+terraform plan -var-file=terraform.dev.tfvars
+terraform apply -var-file=terraform.dev.tfvars
+terraform destroy -var-file=terraform.dev.tfvars
+```

@@ -1,6 +1,6 @@
 resource "aws_s3_bucket" "nuxt-spa-dev" {
   bucket = "${var.service_name}-${var.env_prefix}-bucket"
-  acl    = "public-read"
+  acl    = "private"
 
   website_domain   = "s3-website-ap-northeast-1.amazonaws.com"
   website_endpoint = "${var.service_name}-${var.env_prefix}-bucket.s3-website-ap-northeast-1.amazonaws.com"
@@ -19,13 +19,14 @@ resource "aws_s3_bucket_policy" "nuxt-spa-dev" {
       Statement = [
         {
           Action = [
-            "s3:GetObject",
-            "s3:PutObject"
+            "s3:GetObject"
           ]
           Effect    = "Allow"
-          Principal = "*"
+          Principal = {
+            AWS = [aws_cloudfront_origin_access_identity.nuxt-spa-dev.iam_arn]
+          }
           Resource  = "${aws_s3_bucket.nuxt-spa-dev.arn}/*"
-          Sid       = "PublicReadForGetBucketObjects"
+          Sid       = "PolicyForCloudFrontPrivateContent"
         },
       ]
       Version = "2012-10-17"

@@ -2,6 +2,10 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
   origin {
     domain_name = aws_s3_bucket.nuxt-spa-dev.bucket_regional_domain_name
     origin_id   = "S3-${var.service_name}-${var.env_prefix}-bucket"
+    # 追加
+    s3_origin_config {
+      origin_access_identity = aws_cloudfront_origin_access_identity.nuxt-spa-dev.cloudfront_access_identity_path
+    }
   }
 
   enabled             = true
@@ -64,4 +68,8 @@ resource "aws_cloudfront_distribution" "s3_distribution" {
 
 
   depends_on = [aws_acm_certificate.cert]
+}
+## CloudFront OAI 作成
+resource "aws_cloudfront_origin_access_identity" "nuxt-spa-dev" {
+  comment = "Origin Access Identity for s3 ${aws_s3_bucket.nuxt-spa-dev.id}"
 }

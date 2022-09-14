@@ -29,7 +29,3 @@ $ aws s3 sync dist/ s3://${DEPLOY_BUCKET} --delete
 # cloudfrontのキャッシュ全て（--paths "/*"） を削除
 $ aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION_ID} --paths "/*" --region ap-northeast-1
 ```
-
-aws s3 sync dist/ s3://nuxt-spa-dev-nuxt-spa-prefix-bucket --delete
-
-aws cloudfront create-invalidation --distribution-id EUC91YKXP1PM0 --paths "/\*" --region ap-northeast-1

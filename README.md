@@ -1,4 +1,4 @@
-# nuxt-spa-terraform
+# nuxt-spa-terraform-template
 
 ## Build Setup
 
@@ -21,7 +21,7 @@ For detailed explanation on how things work, check out the [documentation](https
 
 ## Deploy
 
-```sh
+```bash
 $ yarn install
 $ yarn run build
 # s3 に dist/ を同期
@@ -30,7 +30,7 @@ $ aws s3 sync dist/ s3://${DEPLOY_BUCKET} --delete
 $ aws cloudfront create-invalidation --distribution-id ${DISTRIBUTION_ID} --paths "/*" --region ap-northeast-1
 ```
 
-## 環境構築
+## Building
 
 ```
 terraform init
